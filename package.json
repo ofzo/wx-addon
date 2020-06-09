@@ -1,5 +1,5 @@
 {
-    "name": "wx-core",
+    "name": "@roadup/core",
     "version": "0.0.1",
     "main": "index.js",
     "license": "MIT",
