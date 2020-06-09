@@ -1,0 +1,22 @@
+{
+    "name": "wx-core",
+    "version": "0.0.1",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "build": "node webpack.config.js"
+    },
+    "dependencies": {
+        "@babel/core": "^7.6.4",
+        "@babel/plugin-proposal-export-default-from": "^7.5.2",
+        "@babel/plugin-proposal-throw-expressions": "^7.2.0",
+        "babel": "^6.23.0",
+        "babel-loader": "^8.1.0",
+        "base64-url": "^2.3.3",
+        "webpack": "^4.41.2"
+    },
+    "description": "wechat core",
+    "devDependencies": {},
+    "keywords": [],
+    "author": "roadup <roadup.inbox@gmail.com>"
+}
