@@ -18,5 +18,6 @@
     "description": "wechat core",
     "devDependencies": {},
     "keywords": [],
-    "author": "roadup <roadup.inbox@gmail.com>"
+    "author": "roadup <roadup.inbox@gmail.com>",
+    "repository": "git@github:uploy/core"
 }
