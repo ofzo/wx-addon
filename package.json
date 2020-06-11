@@ -1,10 +1,11 @@
 {
     "name": "@roadup/core",
-    "version": "0.0.4",
+    "version": "0.0.6",
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "build": "node webpack.config.js"
+        "build": "node webpack.config.js",
+        "prepublish": "npm run  build"
     },
     "dependencies": {
         "@babel/core": "^7.6.4",
