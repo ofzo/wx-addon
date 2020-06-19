@@ -21,13 +21,13 @@ export default function request(url, data, method, cancelId) {
                     $message.emit("request.success", { options, res })
                     $tap("request.success", null, ({ res }) => {
                         resolve(res.data)
-                    }, { options, res })
+                    }, { options, res, resolve, reject })
                 },
                 fail(error) {
                     $message.emit("request.fail", { options, error })
                     $tap("request.fail", null, ({ error }) => {
                         reject(error)
-                    }, { options, error })
+                    }, { options, error, resolve, reject })
                 },
                 complete() {
                     $tap("request.complete", null, a => a, { options })

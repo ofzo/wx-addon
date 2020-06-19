@@ -45,7 +45,6 @@ export function goto(page, data = {}) {
 /**
  * 向前返回 `delta` 数量的页面，并向目标页面传递数据
  * @param {number} delta
- * @param {*} data
  */
 export function back(delta = 1) {
     const currentPage = getCurrentPages().pop()
