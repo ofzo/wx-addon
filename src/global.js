@@ -22,6 +22,10 @@ function initGlobal(init) {
     GLOBAL.screenWidth = sys.screenWidth
     GLOBAL.pixelRatio = sys.pixelRatio
     GLOBAL.SDKVersion = sys.SDKVersion
+    GLOBAL.model = sys.model
+    GLOBAL.language = sys.language
+    GLOBAL.system = sys.system
+    GLOBAL.brand = sys.brand
     // const model = sys.model
     // __GLOBAL_.isIphoneX = model.search("iPhone X") !== -1
     const menuInfo = wx.getMenuButtonBoundingClientRect()
