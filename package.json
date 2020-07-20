@@ -1,6 +1,6 @@
 {
     "name": "@roadup/core",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "main": "index.js",
     "license": "MIT",
     "scripts": {
@@ -20,5 +20,5 @@
     "devDependencies": {},
     "keywords": [],
     "author": "roadup <roadup.inbox@gmail.com>",
-    "repository": "git@github:uploy/core"
+    "repository": "git@github:oft/core"
 }
