@@ -39,10 +39,8 @@ function initGlobal(init) {
     }, 500)
     console.log(`本地存储数据(${info.currentSize}KB)`)
 
-    console.log(GLOBAL)
-    init && $message.emit("global.$$init$$", { ...GLOBAL })
     setTimeout(() => {
-        $message.emit("global.$$init$$.complete", { ...GLOBAL })
+        $message.emit("global.$$init$$", { ...GLOBAL, init })
     }, 0)
     // const returns = $tap("global.init")
     // if (typeof returns === "object") {
