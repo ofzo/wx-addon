@@ -41,6 +41,9 @@ function initGlobal(init) {
 
     console.log(GLOBAL)
     init && $message.emit("global.$$init$$", { ...GLOBAL })
+    setTimeout(() => {
+        $message.emit("global.$$init$$.complete", { ...GLOBAL })
+    }, 0)
     // const returns = $tap("global.init")
     // if (typeof returns === "object") {
     //     Object.assign(GLOBAL, null, returns)
