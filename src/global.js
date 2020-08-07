@@ -40,7 +40,7 @@ function initGlobal(init) {
     console.log(`本地存储数据(${info.currentSize}KB)`)
 
     console.log(GLOBAL)
-    init && $message.emit("global.$$init$$")
+    init && $message.emit("global.$$init$$", { ...GLOBAL })
     // const returns = $tap("global.init")
     // if (typeof returns === "object") {
     //     Object.assign(GLOBAL, null, returns)
