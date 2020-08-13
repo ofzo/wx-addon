@@ -8,13 +8,15 @@ import $preset from "./preset"
 import $request from "./request"
 import * as $router from "./router"
 
-Promise.prototype.finally = function (callback) {
-    const P = this.constructor
-    return this.then(
-        value => P.resolve(callback()).then(() => value),
-        reason => P.resolve(callback()).then(() => { throw reason })
-    )
-}
+// if (typeof Promise.prototype.finally !== "function") {
+//     Promise.prototype.finally = function (callback) {
+//         const P = this.constructor
+//         return this.then(
+//             value => P.resolve(callback()).then(() => value),
+//             reason => P.resolve(callback()).then(() => { throw reason })
+//         )
+//     }
+// }
 
 /**
  * 检查小程序是否有更新
