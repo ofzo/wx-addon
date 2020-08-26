@@ -78,6 +78,7 @@ App.$on = $message.on
 App.$race = $message.race
 App.$emit = $message.emit
 App.$off = $message.off
+App.$has = $message.has
 
 const $core = { $message, $global, $router, $request, $take: $preset }
 

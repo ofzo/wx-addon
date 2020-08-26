@@ -14,7 +14,7 @@ export function on(name, func) {
     if (!EVENT_HANDLER[name]) {
         EVENT_HANDLER[name] = {}
     }
-    const key = createKey()
+    const key = name + "_" + createKey()
     EVENT_HANDLER[name][key] = func
     return key
 }
@@ -40,15 +40,24 @@ export function off(name) {
     Object.values(EVENT_HANDLER).forEach(e => {
         Object.entries(e).forEach(([key, fn]) => {
             if (key === name || fn === name) {
+                console.log(`[取消事件 ${name}]`)
                 delete e[key]
             }
         })
     })
 }
 
+export function has(name) {
+    if (EVENT_HANDLER[name]) {
+        return Object.keys(EVENT_HANDLER[name]).length
+    }
+    return 0
+}
+
 export function race(key, fn) {
-    return on(key, (message) => {
+    let name = on(key, (message) => {
         fn(message)
-        off(fn)
+        off(name)
     })
+    return name
 }
