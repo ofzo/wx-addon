@@ -30,11 +30,13 @@ function initGlobal(init) {
     // __GLOBAL_.isIphoneX = model.search("iPhone X") !== -1
     const menuInfo = wx.getMenuButtonBoundingClientRect()
     GLOBAL.titleHeight = menuInfo.height + (menuInfo.top - sys.statusBarHeight) * 2
+    GLOBAL.menuInfo = menuInfo
     setTimeout(() => {
         const menuInfo = wx.getMenuButtonBoundingClientRect()
         const titleHeight = menuInfo.height + (menuInfo.top - sys.statusBarHeight) * 2
         if (GLOBAL.titleHeight !== titleHeight) {
             write("titleHeight", menuInfo.height + (menuInfo.top - sys.statusBarHeight) * 2)
+            $message.emit("log.info", "更新menuInfo", menuInfo)
         }
     }, 500)
     console.log(`本地存储数据(${info.currentSize}KB)`)
