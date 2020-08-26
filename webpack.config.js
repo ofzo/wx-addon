@@ -1,7 +1,7 @@
 const path = require("path")
 const webpack = require("webpack")
 webpack({
-    mode: "development",
+    mode: "production",
     entry: "./src/main.js",
     output: {
         filename: "index.js",
