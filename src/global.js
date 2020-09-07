@@ -29,8 +29,15 @@ function initGlobal(init) {
     // const model = sys.model
     // __GLOBAL_.isIphoneX = model.search("iPhone X") !== -1
     const menuInfo = wx.getMenuButtonBoundingClientRect()
-    GLOBAL.titleHeight = menuInfo.height + (menuInfo.top - sys.statusBarHeight) * 2
     GLOBAL.menuInfo = menuInfo
+    if (menuInfo.height > 0) {
+        GLOBAL.titleHeight = menuInfo.height + (menuInfo.top - sys.statusBarHeight) * 2
+    } else {
+        GLOBAL.titleHeight = 44
+        if (GLOBAL.model === "iPhone X" || GLOBAL.model === "iPhone Xs" || GLOBAL.model === "iPhone 11" || GLOBAL.model === "iPhone 12") {
+            GLOBAL.titleHeight = 88
+        }
+    }
     setTimeout(() => {
         const menuInfo = wx.getMenuButtonBoundingClientRect()
         const titleHeight = menuInfo.height + (menuInfo.top - sys.statusBarHeight) * 2
@@ -38,7 +45,7 @@ function initGlobal(init) {
             write("titleHeight", menuInfo.height + (menuInfo.top - sys.statusBarHeight) * 2)
             $message.emit("log.info", "更新menuInfo", menuInfo)
         }
-    }, 500)
+    }, 1000)
     console.log(`本地存储数据(${info.currentSize}KB)`)
 
     setTimeout(() => {
