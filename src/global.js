@@ -1,4 +1,4 @@
-
+compatiable getMenuButtonBoundingClientRect error data
 import * as $message from "./message"
 
 let GLOBAL = {}
@@ -38,14 +38,15 @@ function initGlobal(init) {
             GLOBAL.titleHeight = 88
         }
     }
-    setTimeout(() => {
+    $message.on("app.onLaunch", () => {
         const menuInfo = wx.getMenuButtonBoundingClientRect()
         const titleHeight = menuInfo.height + (menuInfo.top - sys.statusBarHeight) * 2
         if (GLOBAL.titleHeight !== titleHeight) {
             write("titleHeight", menuInfo.height + (menuInfo.top - sys.statusBarHeight) * 2)
             $message.emit("log.info", "更新menuInfo", menuInfo)
         }
-    }, 1000)
+    })
+
     console.log(`本地存储数据(${info.currentSize}KB)`)
 
     setTimeout(() => {
