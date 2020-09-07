@@ -1,4 +1,3 @@
-compatiable getMenuButtonBoundingClientRect error data
 import * as $message from "./message"
 
 let GLOBAL = {}
