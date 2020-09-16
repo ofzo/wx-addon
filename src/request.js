@@ -10,7 +10,7 @@ if (typeof Promise.prototype.finally !== "function") {
         )
     }
 }
-export default function request(url, data, method, cancelId) {
+export default function request(url, data, method, header, dataType, cancelId) {
     Object.entries(data).forEach(([key, value]) => {
         if (value === void 0) console.error(`请求的数据中包含 \`${key} = ${void 0}\`, 请检查是否有误`)
     })
@@ -18,8 +18,9 @@ export default function request(url, data, method, cancelId) {
     const options = {
         url,
         data,
+        dataType,
         method,
-        header: {},
+        header: header || {},
     }
 
     return $tap("request.before", null, () => {
@@ -29,7 +30,11 @@ export default function request(url, data, method, cancelId) {
                 success: (res) => {
                     $message.emit("request.success", { options, res })
                     $tap("request.success", null, ({ res }) => {
-                        resolve(res.data)
+                        if (dataType === "json") {
+                            resolve(res.data)
+                        } else {
+                            resolve(res)
+                        }
                     }, { options, res, resolve, reject })
                 },
                 fail(error) {
