@@ -11,18 +11,21 @@ if (typeof Promise.prototype.finally !== "function") {
     }
 }
 export default function request(url, data, method, header, dataType, cancelId) {
-    Object.entries(data).forEach(([key, value]) => {
-        if (value === void 0) console.error(`请求的数据中包含 \`${key} = ${void 0}\`, 请检查是否有误`)
-    })
+    if (data) {
+        Object.entries(data).forEach(([key, value]) => {
+            if (value === void 0) console.error(`请求的数据中包含 \`${key} = ${void 0}\`, 请检查是否有误`)
+        })
+    }
 
     const options = {
         url,
-        data,
         dataType,
         method,
         header: header || {},
     }
-
+    if (data) {
+        options.data = data
+    }
     return $tap("request.before", null, () => {
         return new Promise((resolve, reject) => {
             const task = wx.request({
