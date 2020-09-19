@@ -1,15 +1,6 @@
 import * as $message from "./message"
 import { $tap } from "./preset"
 
-if (typeof Promise.prototype.finally !== "function") {
-    Promise.prototype.finally = function (callback) {
-        const P = this.constructor
-        return this.then(
-            value => P.resolve(callback()).then(() => value),
-            reason => P.resolve(callback()).then(() => { throw reason })
-        )
-    }
-}
 export default function request(url, data, method, header, dataType, cancelId) {
     if (data) {
         Object.entries(data).forEach(([key, value]) => {
@@ -27,6 +18,15 @@ export default function request(url, data, method, header, dataType, cancelId) {
         options.data = data
     }
     return $tap("request.before", null, () => {
+        if (typeof Promise.prototype.finally !== "function") {
+            Promise.prototype.finally = function (callback) {
+                const P = this.constructor
+                return this.then(
+                    value => P.resolve(callback()).then(() => value),
+                    reason => P.resolve(callback()).then(() => { throw reason })
+                )
+            }
+        }
         return new Promise((resolve, reject) => {
             const task = wx.request({
                 ...options,
