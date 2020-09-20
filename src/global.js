@@ -27,22 +27,34 @@ function initGlobal(init) {
     GLOBAL.brand = sys.brand
     // const model = sys.model
     // __GLOBAL_.isIphoneX = model.search("iPhone X") !== -1
-    const menuInfo = wx.getMenuButtonBoundingClientRect()
-    GLOBAL.menuInfo = menuInfo
-    if (menuInfo.height > 0) {
-        GLOBAL.titleHeight = menuInfo.height + (menuInfo.top - sys.statusBarHeight) * 2
-    } else {
+    try {
+        const menuInfo = wx.getMenuButtonBoundingClientRect()
+        GLOBAL.menuInfo = menuInfo
+        if (menuInfo.height > 0) {
+            GLOBAL.titleHeight = menuInfo.height + (menuInfo.top - sys.statusBarHeight) * 2
+        } else {
+            GLOBAL.titleHeight = 44
+            if (GLOBAL.model === "iPhone X" || GLOBAL.model === "iPhone Xs" || GLOBAL.model === "iPhone 11" || GLOBAL.model === "iPhone 12") {
+                GLOBAL.titleHeight = 88
+            }
+        }
+    } catch (err) {
+        $message.emit("log.error", "wx.getMenuButtonBoundingClientRect() error:", err)
         GLOBAL.titleHeight = 44
         if (GLOBAL.model === "iPhone X" || GLOBAL.model === "iPhone Xs" || GLOBAL.model === "iPhone 11" || GLOBAL.model === "iPhone 12") {
             GLOBAL.titleHeight = 88
         }
     }
     $message.on("app.onLaunch", () => {
-        const menuInfo = wx.getMenuButtonBoundingClientRect()
-        const titleHeight = menuInfo.height + (menuInfo.top - sys.statusBarHeight) * 2
-        if (GLOBAL.titleHeight !== titleHeight) {
-            write("titleHeight", menuInfo.height + (menuInfo.top - sys.statusBarHeight) * 2)
-            $message.emit("log.info", "更新menuInfo", menuInfo)
+        try {
+            const menuInfo = wx.getMenuButtonBoundingClientRect()
+            const titleHeight = menuInfo.height + (menuInfo.top - sys.statusBarHeight) * 2
+            if (GLOBAL.titleHeight !== titleHeight) {
+                write("titleHeight", menuInfo.height + (menuInfo.top - sys.statusBarHeight) * 2)
+                $message.emit("log.info", "更新menuInfo", menuInfo)
+            }
+        } catch (error) {
+            $message.emit("log.error", "app.onLaunch wx.getMenuButtonBoundingClientRect() error:", error)
         }
     })
 
